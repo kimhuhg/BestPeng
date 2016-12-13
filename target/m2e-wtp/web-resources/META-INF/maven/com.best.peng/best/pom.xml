@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.best.peng</groupId>
+  <artifactId>best</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>best Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.4.1.RELEASE</version>
+</parent>
+  <dependencies>
+  
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        
+        <!-- 部署到tomcat时，移除内置tomcat -->
+        <!-- 
+        <exclusions>
+			<exclusion>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-tomcat</artifactId>
+			</exclusion>
+		</exclusions> -->
+		<!-- end -->
+		
+    </dependency>
+    <dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-test</artifactId>
+		<scope>test</scope>
+	</dependency>
+	
+	<!-- swagger2 -->
+	<dependency>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-swagger2</artifactId>
+	    <version>2.2.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-swagger-ui</artifactId>
+	    <version>2.2.2</version>
+	</dependency>
+	
+	<!-- 引入连接mysql的必要依赖mysql-connector-java引入整合MyBatis的核心依赖mybatis-spring-boot-starter
+这里不引入spring-boot-starter-jdbc依赖，是由于mybatis-spring-boot-starter中已经包含了此依赖 -->
+	<!-- 
+	<dependency>
+		<groupId>org.mybatis.spring.boot</groupId>
+		<artifactId>mybatis-spring-boot-starter</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+	
+	 -->
+	
+	<!-- spring data jpa -->
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+	
+	<!-- mysql驱动包 -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	</dependency>
+	
+	<!-- druid阿里巴巴数据库连接池 -->
+    <dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid</artifactId>
+		<version>1.0.26</version>
+	</dependency>
+	
+	<!-- 邮件发送 -->
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
+
+	<!-- Springboot 热部署 -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-devtools</artifactId>
+		<optional>true</optional>
+	</dependency>
+	
+	<!-- thymeleaf模板引擎 -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+	</dependency>
+	
+	
+	<!-- 部署到tomcat时需要添加，不然报错 -->
+	<!-- 
+	<dependency>  
+            <groupId>org.apache.tomcat</groupId>  
+            <artifactId>tomcat-servlet-api</artifactId>  
+            <version>7.0.42</version>  
+            <scope>provided</scope>  
+	</dependency> -->
+	
+  </dependencies>
+  <build>
+  	<!-- 部署到tomcat时，取消-->
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+	</plugins> 
+	</build>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+</project>
