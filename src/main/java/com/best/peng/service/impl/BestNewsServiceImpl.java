@@ -40,8 +40,8 @@ public class BestNewsServiceImpl implements BestNewsService {
 	}
 
 	@Override
-	public Page<BestNews> getBestNews(Pageable page) {
-		return bestNewsRepository.findAll(page);
+	public Page<BestNews> getBestNews(String title,Pageable page) {
+		return bestNewsRepository.findByTitleContaining(title, page);
 	}
 	
 	

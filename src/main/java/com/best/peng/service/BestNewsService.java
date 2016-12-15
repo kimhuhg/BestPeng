@@ -12,7 +12,7 @@ public interface BestNewsService{
 	
 	void delete(Long id);
 	
-	Page<BestNews> getBestNews(Pageable page);
+	Page<BestNews> getBestNews(String title,Pageable page);
 	
 	Page<BestNews> getBestNewsWithPage(String title,Pageable page);
 }

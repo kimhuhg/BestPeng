@@ -1,16 +1,18 @@
 package com.best.peng.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.best.peng.domian.BestNews;
@@ -22,7 +24,7 @@ import com.best.peng.service.BestNewsService;
  * @author zhoupeng
  *
  */
-@RestController
+@Controller
 @RequestMapping("news")
 public class BestNewsController {
 	
@@ -34,6 +36,7 @@ public class BestNewsController {
 	 * @param news
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST)
 	public BestNews add(@RequestBody BestNews news){
 		return bestNewsService.saveOrUpdate(news);
@@ -47,10 +50,11 @@ public class BestNewsController {
 	 * 
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value="get/page/{title}",method=RequestMethod.GET)
 	public Page<BestNews> get(@PathVariable("title") String title,
 			@PageableDefault(value = 10, sort = { "createDate" }, direction = Sort.Direction.DESC,page=0,size=10) Pageable pageable){
-		return bestNewsService.getBestNewsWithPage(title,pageable);
+		return bestNewsService.getBestNewsWithPage(title.trim(),pageable);
 	}
 	
 	/**
@@ -62,14 +66,22 @@ public class BestNewsController {
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET)
-	public Page<BestNews> getList(@PageableDefault(value = 10, sort = { "createDate" }, direction = Sort.Direction.DESC,page=0,size=10) Pageable pageable){
-		return bestNewsService.getBestNews(pageable);
+	public String getList(@RequestParam(value="title",required=false,defaultValue="") String title,
+			@PageableDefault(value = 10, sort = { "createDate" }, direction = Sort.Direction.DESC,page=0,size=10) Pageable pageable,
+			ModelMap model){
+		
+		
+		Page<BestNews> bestNews=bestNewsService.getBestNews(title,pageable);
+		model.addAttribute("news", bestNews);
+		
+		return "html/index";
 	}
 	
 	/**
 	 * 删除
 	 * @param id
 	 */
+	@ResponseBody
 	@RequestMapping(value="{id}",method=RequestMethod.DELETE)
 	public void delete(@PathVariable("id") Long id){
 		bestNewsService.delete(id);
