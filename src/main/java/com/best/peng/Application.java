@@ -19,7 +19,7 @@ public class Application{
 	
 
 	
-	//tomcat部署..
+	//tomcat部署.. extends SpringBootServletInitializer 
 //	@Override
 //    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 //        return application.sources(Application.class);
