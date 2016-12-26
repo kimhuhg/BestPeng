@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author zhoupeng
  *
  */
-@EnableScheduling  //启用定时任务配置
+//@EnableScheduling  //启用定时任务配置
 @SpringBootApplication //等同于 @Configuration @EnableAutoConfiguration @ComponentScan
 @ServletComponentScan //spring能够扫描到我们自己编写的servlet和filter。这里是配置Druid使用
 public class Application{

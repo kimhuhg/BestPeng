@@ -29,6 +29,14 @@ public class BestFileController {
 	@Resource
 	private BestFileService bestFileService;
 	
+	@RequestMapping(value="",method=RequestMethod.GET)
+	public String get(){
+		
+		return "";
+	}
+	
+	
+	
 	@RequestMapping(value="upload",method=RequestMethod.POST)
 	@ResponseBody
 	public String upload(MultipartFile file, HttpServletRequest req) throws IllegalStateException, IOException{

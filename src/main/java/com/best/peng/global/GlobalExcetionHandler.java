@@ -18,7 +18,7 @@ public class GlobalExcetionHandler {
 	// 异常处理的方法
 	@ExceptionHandler
 	public ModelAndView error(Exception ex,HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView("error");
+		ModelAndView mv = new ModelAndView("500");
 		
 		mv.addObject("excetion", ex);
 		mv.addObject("message", ex.getMessage());

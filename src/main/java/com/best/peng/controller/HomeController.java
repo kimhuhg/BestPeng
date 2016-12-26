@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.best.peng.domian.BestUser;
 import com.best.peng.service.BestNewsService;
 
 @Controller
@@ -27,5 +28,29 @@ public class HomeController {
 		
 		model.addAttribute("news", bestNewsService.getBestNews(title, page));
 		return "index";
+	}
+	
+	/**
+	 * 登录
+	 * @return
+	 */
+	@RequestMapping("login")
+	public String login(){
+		return "account/login";
+	}
+	
+	/**
+	 * 注册
+	 * @return
+	 */
+	@RequestMapping("register")
+	public String register(){
+		return "account/register";
+	}
+	
+	
+	@RequestMapping("ex")
+	public String ex() throws Exception{
+		throw new Exception("NEW出来的异常!!!!!!!!!!!!");
 	}
 }

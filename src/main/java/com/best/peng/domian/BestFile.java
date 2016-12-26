@@ -11,22 +11,34 @@ public class BestFile {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long fileId;
+	
 	@Column(nullable=false,length=50)
 	private String name;
+	
 	@Column(nullable=false)
-	private Double size;
+	private Integer size;
+	
 	@Column(nullable=false,length=200)
-	private String path;
-	@Column(nullable=false)
+	private String url;
+	
+	@Column(nullable=false,updatable=false)
 	private Date createTime;
-	@Column()
+	
+	@Column(insertable=false)
 	private Date updateTime;
-	@Column(nullable=false,length=6)
+	
+	@Column(nullable=false)
 	private Long parentId;
+	
 	@Column(nullable=false,length=50)
-	private String md5;
+	private String eTag;
+	
+	@Column(nullable=false)
+	private Long rootFoldeId;
+	
 	@Column(nullable=false)
 	private boolean valid;
+	
 	public Long getFileId() {
 		return fileId;
 	}
@@ -39,17 +51,23 @@ public class BestFile {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Double getSize() {
+	public Integer getSize() {
 		return size;
 	}
-	public void setSize(Double size) {
+	public void setSize(Integer size) {
 		this.size = size;
 	}
-	public String getPath() {
-		return path;
+	public String getUrl() {
+		return url;
 	}
-	public void setPath(String path) {
-		this.path = path;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public Long getRootFoldeId() {
+		return rootFoldeId;
+	}
+	public void setRootFoldeId(Long rootFoldeId) {
+		this.rootFoldeId = rootFoldeId;
 	}
 	public Date getCreateTime() {
 		return createTime;
@@ -69,11 +87,11 @@ public class BestFile {
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
-	public String getMd5() {
-		return md5;
+	public String getETag() {
+		return eTag;
 	}
-	public void setMd5(String md5) {
-		this.md5 = md5;
+	public void setETag(String eTag) {
+		this.eTag = eTag;
 	}
 	public boolean isValid() {
 		return valid;
