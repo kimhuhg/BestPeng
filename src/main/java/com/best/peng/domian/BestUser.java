@@ -23,10 +23,10 @@ public class BestUser implements Serializable{
 	@Column(unique=true)
 	private Long phoneNumber;
 	
-	@Column(nullable=false,length=20)
+	@Column(nullable=false,length=50)
 	private String password;
 	
-	@Column(nullable=false,length=50)
+	@Column(length=50)
 	private String userName;
 	
 	@Column(nullable=false)

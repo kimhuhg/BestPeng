@@ -1,7 +1,7 @@
 package com.best.peng.domian;
 
 public class BestHttpResponseMessage {
-	private Integer code;
+	private Integer code=200;
 	private String msg;
 	private String url;
 	public Integer getCode() {

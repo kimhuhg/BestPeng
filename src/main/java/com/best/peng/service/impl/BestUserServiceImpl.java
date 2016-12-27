@@ -2,7 +2,6 @@ package com.best.peng.service.impl;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 
 import javax.transaction.Transactional;
 
@@ -17,6 +16,8 @@ import com.best.peng.repository.BestUserRepository;
 import com.best.peng.service.BestFolderService;
 import com.best.peng.service.BestRootFolderService;
 import com.best.peng.service.BestUserService;
+import com.best.peng.util.MD5Utils;
+import com.best.peng.util.ValidateHelper;
 
 @Service
 public class BestUserServiceImpl implements BestUserService {
@@ -35,12 +36,20 @@ public class BestUserServiceImpl implements BestUserService {
 	public BestUser addOrUpdate(BestUser user) {
 		
 		boolean flag=user.getUserId()==null?true:false;
+		//密码加密
+		String password=MD5Utils.encrypt(user.getPassword()+BestConstant.PWD_TOKEN, MD5Utils.MD5_KEY);
 		
 		Date nowTime=Calendar.getInstance().getTime();
-		user.setCreateDate(nowTime);
 		user.setUpdateDate(nowTime);
-		user.setStatus(false);
-		user.setValid(true);
+		
+		if(flag){
+			user.setCreateDate(nowTime);
+			user.setLoginDate(nowTime);
+			user.setStatus(false);
+			user.setValid(true);
+			user.setPassword(password);
+			user.setUserName(user.getEmail());
+		}
 		BestUser bestUser=bestUserRepository.save(user);
 		
 		//为新用户时
@@ -79,6 +88,19 @@ public class BestUserServiceImpl implements BestUserService {
 	@Override
 	public BestUser findBestUserByEmail(String email) {
 		return bestUserRepository.findByEmail(email);
+	}
+
+	@Override
+	public BestUser findByBestUserByEmailAndPwd(String email, String password) {
+		password=MD5Utils.encrypt(password+BestConstant.PWD_TOKEN, MD5Utils.MD5_KEY);
+		return bestUserRepository.findByEmailAndPassword(email, password);
+	}
+
+	@Override
+	@Transactional //更新，必须开启事务
+	public int updateBestUserLoginDate(String email) {
+		
+		return bestUserRepository.updateBestUserLoginDate(Calendar.getInstance().getTime(), email);
 	}
 	
 }

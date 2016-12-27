@@ -16,7 +16,7 @@
   <div class="main">
     <a class="logo" href="/" title="Fly">个人云</a>
     <div class="nav">
-      <a class="nav-this" href="index.html">
+      <a class="nav-this" href="/">
         <i class="iconfont icon-wenda"></i>个人云
       </a>
     </div>
@@ -31,19 +31,23 @@
 <div class="main layui-clear">
   <h2 class="page-title">登录</h2> 
   <div class="layui-form layui-form-pane">
-    <form method="post">
+    <form method="post" id="loginForm" action="/account/login">
       <div class="layui-form-item">
         <label for="L_email" class="layui-form-label">邮箱</label>
         <div class="layui-input-inline">
-          <input type="text" id="L_email" name="email" required="true" lay-verify="required" autocomplete="off" class="layui-input"/>
+          <input type="text" id="L_email" name="email" th:value="${email}" required="true" lay-verify="required" autocomplete="off" class="layui-input"/>
+        </div>
+        <div class="layui-form-mid">
+          <span style="color: #c00;" th:text="${msg}">用户名或密码错误</span>
         </div>
       </div>
       <div class="layui-form-item">
         <label for="L_pass" class="layui-form-label">密码</label>
         <div class="layui-input-inline">
-          <input type="password" id="L_pass" name="pass" required="true" lay-verify="required" autocomplete="off" class="layui-input"/>
+          <input type="password" id="L_pass" name="password" required="true" lay-verify="required" autocomplete="off" class="layui-input"/>
         </div>
       </div>
+      
       <div class="layui-form-item">
         <label for="L_vercode" class="layui-form-label">验证码</label>
         <div class="layui-input-inline">
@@ -53,21 +57,22 @@
           <span style="color: #c00;">{{d.vercode}}</span>
         </div>
       </div>
+       
       <div class="layui-form-item">
-        <button class="layui-btn" lay-filter="*" lay-submit="true">立即登录</button>
+        <button class="layui-btn">立即登录</button>
         <span style="padding-left:20px;">
           <a href="/user/forget">忘记密码？</a>
         </span>
       </div>
       <div class="layui-form-item fly-form-app">
-        <span>或者使用社交账号登入</span>
+        <span>其他方式登录</span>
         <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
         <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
       </div>
     </form>
   </div>
 </div>
-
+ 
 <div class="footer">
   <p><a href="http://fly.layui.com/">Fly社区</a> 2016 &copy; <a href="http://www.layui.com/">layui.com</a></p>
   <p>
@@ -79,6 +84,10 @@
   </p>
 </div>
 <script src="../../res/layui/layui.js"></script>
-
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	
+	
+</script>
 </body>
 </html>
