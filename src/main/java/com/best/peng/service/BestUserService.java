@@ -1,8 +1,13 @@
 package com.best.peng.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.best.peng.domian.BestUser;
 
 public interface BestUserService {
+	
+	Page<BestUser> list(Pageable page);
 
 	BestUser addOrUpdate(BestUser user);
 	
@@ -18,4 +23,6 @@ public interface BestUserService {
 	
 	//修改登录时间
 	int updateBestUserLoginDate(String email);
+	
+	int updateBestUserPassword(Long userId,String oldPassword,String newPassword);
 }

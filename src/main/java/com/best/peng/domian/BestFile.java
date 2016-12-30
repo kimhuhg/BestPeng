@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table
 public class BestFile {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long fileId;
 	
 	@Column(nullable=false,length=50)
@@ -36,7 +36,7 @@ public class BestFile {
 	@Column(nullable=false)
 	private Long rootFoldeId;
 	
-	@Column(nullable=false)
+	@Column(nullable=false,columnDefinition="bit default 1")
 	private boolean valid;
 	
 	public Long getFileId() {

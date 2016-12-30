@@ -2,9 +2,12 @@ package com.best.peng.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.best.peng.domian.BestUser;
 
 /**
  * 拦截器
@@ -27,10 +30,19 @@ public class BestHandlerInterceptor implements HandlerInterceptor{
 		
 	}
 
+	//在请求处理之前进行调用(Controller方法调用之前)
 	@Override
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
-		System.out.println(">>>MyInterceptor1>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
 
+		//获取拦截的地址，便于登陆后跳转
+		String backUrl=arg0.getRequestURI();
+		System.out.println(arg0.getRequestURL());
+		HttpSession session=arg0.getSession();
+		BestUser user=(BestUser)session.getAttribute("user");
+		if(user==null){
+			arg1.sendRedirect("/login?backUrl="+backUrl);
+			return false;
+		}
 		return true;// 只有返回true才会继续向下执行，返回false取消当前请求
 	}
 

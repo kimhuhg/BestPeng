@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table
 public class BestRootFolder {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long rootFolderId;
 	
 	@Column(nullable=false)

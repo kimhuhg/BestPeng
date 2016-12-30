@@ -1,5 +1,8 @@
 package com.best.peng.controller;
 
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -7,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.best.peng.domian.BestUser;
@@ -24,9 +28,14 @@ public class HomeController {
 	 */
 	@RequestMapping("/")
 	public String index(ModelMap model,@RequestParam(defaultValue="",required=false,value="title") String title,
-			@PageableDefault(page=0,size=10,direction=Sort.Direction.DESC,sort={"createDate"}) Pageable page){
+			@PageableDefault(page=0,size=10,direction=Sort.Direction.DESC,sort={"createDate"}) Pageable page,
+			HttpSession session){
 		
 		model.addAttribute("news", bestNewsService.getBestNews(title, page));
+		
+		BestUser user=(BestUser)session.getAttribute("user");
+		model.addAttribute("user", user);
+		
 		return "index";
 	}
 	
@@ -47,7 +56,17 @@ public class HomeController {
 	public String register(){
 		return "account/register";
 	}
-	
+	/**
+	 * 个人设置
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="set",method=RequestMethod.GET)
+	public String set(HttpSession session,ModelMap model){
+		BestUser user=(BestUser)session.getAttribute("user");
+		model.addAttribute("user", user);
+		return "account/set";
+	}
 	
 	@RequestMapping("ex")
 	public String ex() throws Exception{

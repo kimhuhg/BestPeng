@@ -45,7 +45,7 @@ public final class ValidateHelper {
 	 * @return boolean
 	 */
 	public static boolean isEmptyString(String string){
-		if (string == null || string.length() == 0||"".equals(string)){
+		if (string == null || string.length() == 0&&"".equals(string)){
 			return true;
 		}
 		else{
@@ -55,11 +55,12 @@ public final class ValidateHelper {
 	
 	/**
 	 *  判断字符串是否不为空
+	 *  "" null 返回true
 	 * @param string
 	 * @return boolean
 	 */
 	public static boolean isNotEmptyString(String string){
-		if (string != null && string.length() > 0){
+		if (string != null && string.length() > 0&&!"".equals(string)){
 			return true;
 		}
 		else{

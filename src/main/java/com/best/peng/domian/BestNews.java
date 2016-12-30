@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table
 public class BestNews {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long newsId;
 	@Column(nullable = false, length = 100)
 	private String title;

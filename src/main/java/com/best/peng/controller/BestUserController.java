@@ -48,6 +48,9 @@ public class BestUserController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String list(){
+		
+		
+		
 		return "";
 	}
 	

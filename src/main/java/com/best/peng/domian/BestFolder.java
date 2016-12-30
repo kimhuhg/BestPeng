@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table
 public class BestFolder {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long folderId;
 	
 	@Column(nullable=false,length=50)
@@ -30,10 +30,10 @@ public class BestFolder {
 	@Column(nullable=false)
 	private Long rootFoldeId;
 	
-	@Column()
+	@Column(columnDefinition="int(4) default 0")
 	private Integer folderType;
 	
-	@Column(nullable=false)
+	@Column(nullable=false,columnDefinition="bit default 1")
 	private boolean valid;
 	
 	public Integer getFolderType() {

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.Email;
+
 @Entity
 @Table
 public class BestUser implements Serializable{
@@ -14,9 +16,10 @@ public class BestUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long userId;
 	
+	@Email(message="不是正确的邮箱格式")
 	@Column(length=50,nullable=false,unique=true)
 	private String email;
 	
@@ -29,11 +32,14 @@ public class BestUser implements Serializable{
 	@Column(length=50)
 	private String userName;
 	
-	@Column(nullable=false)
+	//设置默认值为1
+	@Column(nullable=false,columnDefinition="bit default 1")
 	private boolean valid;
 	
-	@Column(nullable=false)
-	private boolean status;
+	//指定长度和设置默认值
+	@Column(nullable=false,columnDefinition="int(4) default 0")
+	private Integer status;
+	
 	@Column(nullable=false,updatable=false)
 	private Date createDate;
 	
@@ -49,10 +55,13 @@ public class BestUser implements Serializable{
 	@Column()
 	private Long qq;
 	
-	@Column()
+	@Column(length=100)
+	private String avatarUrl;
+	
+	@Column(columnDefinition="int(4)")
 	private Integer groupId;
 	
-	@Column()
+	@Column(columnDefinition="int(4)")
 	private Integer companyId;
 
 	public Long getUserId() {
@@ -159,12 +168,24 @@ public class BestUser implements Serializable{
 		this.valid = valid;
 	}
 
-	public boolean isStatus() {
+	public Integer isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public Integer getStatus() {
+		return status;
 	}
 	
 	
