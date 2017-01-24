@@ -11,7 +11,8 @@ public class BestConstant {
 	public static final String[] FOLDER_TYPE={"图片","文档","视频","音乐"};
 	
 	//加密常量
-	public static final String PWD_TOKEN="bestcloud";
+	public static final String PWD_TOKEN_START="best!@#$";
+	public static final String PWD_TOKEN_END="*&^%best";
 	
 	//默认用户头像
 	public static final String AVATAR_URL="localhost:8082/image/glc_coupe.jpg";

@@ -9,11 +9,11 @@ public interface BestUserService {
 	
 	Page<BestUser> list(Pageable page);
 
-	BestUser addOrUpdate(BestUser user);
+	BestUser saveOrUpdate(BestUser user);
 	
-	BestUser getUserById(Long userId);
+	BestUser getUserById(Integer userId);
 	
-	void delete(Long userId);
+	void remove(Integer userId);
 	
 	//根据Email查询用户
 	BestUser findBestUserByEmail(String email);
@@ -24,5 +24,6 @@ public interface BestUserService {
 	//修改登录时间
 	int updateBestUserLoginDate(String email);
 	
-	int updateBestUserPassword(Long userId,String oldPassword,String newPassword);
+	//修改密码
+	int updateBestUserPassword(Integer userId,String oldPassword,String newPassword);
 }

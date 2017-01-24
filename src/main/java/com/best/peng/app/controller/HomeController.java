@@ -1,4 +1,4 @@
-package com.best.peng.controller;
+package com.best.peng.app.controller;
 
 
 import javax.servlet.http.HttpSession;
@@ -36,7 +36,7 @@ public class HomeController {
 		BestUser user=(BestUser)session.getAttribute("user");
 		model.addAttribute("user", user);
 		
-		return "index";
+		return "system/user_list";
 	}
 	
 	/**
@@ -44,9 +44,18 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping("login")
-	public String login(){
-		return "account/login";
+	public String table(){
+		return "account/table";
 	}
+	
+	/**
+	 * 登录
+	 * @return
+	 */
+//	@RequestMapping("login")
+//	public String login(){
+//		return "account/login";
+//	}
 	
 	/**
 	 * 注册

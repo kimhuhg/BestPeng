@@ -1,4 +1,4 @@
-package com.best.peng.controller;
+package com.best.peng.app.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +85,7 @@ public class AccountController {
 		
 		//邮箱验证
 		
-		BestUser userDb=bestUserService.addOrUpdate(user);
+		BestUser userDb=bestUserService.saveOrUpdate(user);
 		HttpSession session=request.getSession();
 		session.setAttribute("user", userDb);
 		
@@ -118,7 +118,7 @@ public class AccountController {
 		
 		BestUser user=(BestUser)session.getAttribute("user");
 		if(user!=null){
-			int count=bestUserService.updateBestUserPassword(user.getUserId(), oldPassword, newPassword);
+			int count=bestUserService.updateBestUserPassword(user.getId(), oldPassword, newPassword);
 			if(count>0){
 				message.put("code", 200);
 				message.put("msg", "密码修改成功!");
@@ -129,19 +129,6 @@ public class AccountController {
 		}
 		
 		return message;
-	}
-	
-	/**
-	 * 获取配置文件随机数生成
-	 */
-	@Value("${rand.range}")
-	private int random;
-	
-	@RequestMapping(value="random",method=RequestMethod.GET)
-	@ResponseBody
-	public String getRandom(){
-		
-		return random+"";
 	}
 	
 }

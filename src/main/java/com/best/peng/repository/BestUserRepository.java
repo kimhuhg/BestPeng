@@ -10,7 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.best.peng.domian.BestUser;
 
-public interface BestUserRepository extends JpaRepository<BestUser, Long>,JpaSpecificationExecutor<BestUser> {
+public interface BestUserRepository extends JpaRepository<BestUser, Integer>,JpaSpecificationExecutor<BestUser> {
+	
 	BestUser findByEmail(String email);
 	
 	BestUser findByEmailAndPassword(String email,String password);
@@ -22,6 +23,6 @@ public interface BestUserRepository extends JpaRepository<BestUser, Long>,JpaSpe
 	int updateBestUserLoginDate(@Param("loginDate") Date loginDate,@Param("email") String email);
 	
 	@Modifying
-	@Query("UPDATE BestUser B SET B.password=:password WHERE B.userId=:userId")
-	int updateBestUserPassword(@Param("userId")Long userId,@Param("password")String newPassword);
+	@Query("UPDATE BestUser B SET B.password=:password WHERE B.id=:userId")
+	int updateBestUserPassword(@Param("userId")Integer userId,@Param("password")String newPassword);
 }

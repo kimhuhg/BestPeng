@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table
@@ -17,19 +16,15 @@ public class BestUser implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long userId;
+	private Integer id;
 	
-	@Email(message="不是正确的邮箱格式")
-	@Column(length=50,nullable=false,unique=true)
+	@Column(length=30,nullable=false,unique=true)
 	private String email;
-	
-	@Column(unique=true)
-	private Long phoneNumber;
-	
-	@Column(nullable=false,length=50)
+		
+	@Column(nullable=false,length=20)
 	private String password;
 	
-	@Column(length=50)
+	@Column(length=30)
 	private String userName;
 	
 	//设置默认值为1
@@ -40,76 +35,29 @@ public class BestUser implements Serializable{
 	@Column(nullable=false,columnDefinition="int(4) default 0")
 	private Integer status;
 	
+	//updatable=false:update的时候不更新
 	@Column(nullable=false,updatable=false)
 	private Date createDate;
 	
+	//insertable=false:insert的时候不更新
 	@Column(insertable=false)
-	private Date updateDate;
+	private Date modifiedDate;
 	
-	@Column()
+	@Column(nullable=false)
 	private Date loginDate;
 	
-	@Column()
-	private Date updatePwd;
+	@Column(nullable=false,columnDefinition="int(4) default 0")
+	private Integer roleId;
 	
-	@Column()
-	private Long qq;
-	
-	@Column(length=100)
-	private String avatarUrl;
-	
-	@Column(columnDefinition="int(4)")
+	@Column(nullable=false,columnDefinition="int(4) default 0")
 	private Integer groupId;
-	
-	@Column(columnDefinition="int(4)")
-	private Integer companyId;
 
-	public Long getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
-	public Date getLoginDate() {
-		return loginDate;
-	}
-
-	public void setLoginDate(Date loginDate) {
-		this.loginDate = loginDate;
-	}
-
-	public Date getUpdatePwd() {
-		return updatePwd;
-	}
-
-	public void setUpdatePwd(Date updatePwd) {
-		this.updatePwd = updatePwd;
-	}
-
-	public Long getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(Long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -118,30 +66,6 @@ public class BestUser implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Long getQq() {
-		return qq;
-	}
-
-	public void setQq(Long qq) {
-		this.qq = qq;
-	}
-
-	public Integer getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
-	}
-
-	public Integer getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getPassword() {
@@ -168,7 +92,7 @@ public class BestUser implements Serializable{
 		this.valid = valid;
 	}
 
-	public Integer isStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
@@ -176,16 +100,48 @@ public class BestUser implements Serializable{
 		this.status = status;
 	}
 
-	public String getAvatarUrl() {
-		return avatarUrl;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public Date getLoginDate() {
+		return loginDate;
+	}
+
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
+	}
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public Integer getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

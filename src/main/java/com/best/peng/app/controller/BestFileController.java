@@ -1,4 +1,4 @@
-package com.best.peng.controller;
+package com.best.peng.app.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

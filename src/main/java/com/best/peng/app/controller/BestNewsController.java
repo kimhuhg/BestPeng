@@ -1,4 +1,4 @@
-package com.best.peng.controller;
+package com.best.peng.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
