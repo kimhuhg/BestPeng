@@ -76,9 +76,4 @@ public class HomeController {
 		model.addAttribute("user", user);
 		return "account/set";
 	}
-	
-	@RequestMapping("ex")
-	public String ex() throws Exception{
-		throw new Exception("NEW出来的异常!!!!!!!!!!!!");
-	}
 }
