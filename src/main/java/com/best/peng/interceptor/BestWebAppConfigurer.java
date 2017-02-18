@@ -13,8 +13,7 @@ public class BestWebAppConfigurer extends WebMvcConfigurerAdapter {
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用于排除拦截
 		registry.addInterceptor(new BestHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/login").
-		excludePathPatterns("/register").excludePathPatterns("/account/**").excludePathPatterns("/").
-		excludePathPatterns("/error");
+		excludePathPatterns("/register").excludePathPatterns("/account/**").excludePathPatterns("/error");
 		
 		super.addInterceptors(registry);
 	}

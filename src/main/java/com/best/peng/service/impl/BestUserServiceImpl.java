@@ -10,9 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.best.peng.domian.BestUser;
 import com.best.peng.repository.BestUserRepository;
 import com.best.peng.service.BestUserService;
+import com.best.peng.sys.entity.BestUser;
+import com.best.peng.util.DateUtils;
 import com.best.peng.util.UserUtils;
 
 @Service
@@ -31,9 +32,10 @@ public class BestUserServiceImpl implements BestUserService {
 		
 		//密码加密
 		String password=UserUtils.passwordEncrypt(user.getPassword());
-		Date nowTime=Calendar.getInstance().getTime();
+		Date nowTime=DateUtils.getCurrentDate();
 		user.setModifiedDate(nowTime);
 		
+		//新用户
 		if(flag){
 			user.setCreateDate(nowTime);
 			user.setLoginDate(nowTime);
@@ -41,14 +43,9 @@ public class BestUserServiceImpl implements BestUserService {
 			user.setStatus(0);
 			user.setValid(true);
 			user.setUserName(user.getEmail());
+			user.setGroupId(0);
 		}
 		BestUser bestUser=bestUserRepository.save(user);
-		
-		//为新用户时
-		if(flag){
-			
-			
-		}
 		
 		return bestUser;
 	}

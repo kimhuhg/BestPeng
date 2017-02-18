@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.best.peng.base.controller.BaseController;
-import com.best.peng.domian.BestUser;
-import com.best.peng.service.BestNewsService;
 import com.best.peng.service.BestUserService;
+import com.best.peng.sys.entity.BestUser;
 
 /**
  * 用户管理

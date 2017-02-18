@@ -8,7 +8,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSON;
-import com.best.peng.domian.BestUser;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.best.peng.sys.entity.BestUser;
 import com.best.peng.sys.entity.ResponseMessage;
 import com.best.peng.util.DataTablesUtils;
 
@@ -39,7 +40,7 @@ public class BaseController {
 	 * @return
 	 */
 	public String json(Object object){
-		return JSON.toJSONString(object);
+		return JSON.toJSONString(object,SerializerFeature.DisableCircularReferenceDetect);//DisableCircularReferenceDetect禁止循环引用检测
 	}
 	
 	/**
@@ -62,11 +63,22 @@ public class BaseController {
 		rm.setMsg(msg);
 		return rm;
 	}
-	public ResponseMessage getReMsg(){
-		ResponseMessage rm=new ResponseMessage();
-		rm.setCode(0);
-		rm.setMsg("操作成功");
-		return rm;
+
+	/**
+	 * 响应消息
+	 * @param code
+	 * @param msg
+	 * @return
+	 */
+	public String msg(Integer code,String msg){
+		return json(getReMsg(code,msg));
+	}
+	
+	public String success(){
+		return msg(0,"操作成功");
+	}
+	public String failed(){
+		return msg(1,"操作失败");
 	}
 	
 	/**

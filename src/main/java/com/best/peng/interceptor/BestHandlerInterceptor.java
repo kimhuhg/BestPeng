@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.best.peng.domian.BestUser;
+import com.best.peng.sys.entity.BestUser;
 
 /**
  * 拦截器
@@ -39,10 +39,10 @@ public class BestHandlerInterceptor implements HandlerInterceptor{
 		System.out.println(arg0.getRequestURL());
 		HttpSession session=arg0.getSession();
 		BestUser user=(BestUser)session.getAttribute("user");
-//		if(user==null){
-//			arg1.sendRedirect("/login?backUrl="+backUrl);
-//			return false;
-//		}
+		if(user==null){
+			arg1.sendRedirect("/login?backUrl="+backUrl);
+			return false;
+		}
 		return true;// 只有返回true才会继续向下执行，返回false取消当前请求
 	}
 

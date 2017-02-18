@@ -1,10 +1,10 @@
-package com.best.peng.domian;
+package com.best.peng.sys.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
-
 
 @Entity
 @Table
@@ -21,7 +21,7 @@ public class BestUser implements Serializable{
 	@Column(length=30,nullable=false,unique=true)
 	private String email;
 		
-	@Column(nullable=false,length=20)
+	@Column(nullable=false,length=50)
 	private String password;
 	
 	@Column(length=30)
@@ -47,10 +47,24 @@ public class BestUser implements Serializable{
 	private Date loginDate;
 	
 	@Column(nullable=false,columnDefinition="int(4) default 0")
-	private Integer roleId;
-	
-	@Column(nullable=false,columnDefinition="int(4) default 0")
 	private Integer groupId;
+	
+	/**
+     * 一个用户对应一个角色
+     * 关联实体(User)的主键一般用来做外键。如果不使用主键作为外键，则需要设置referencedColumnName属性
+     * 会生成已role_id的外键，并添加生成外键约束
+     */
+    @ManyToOne()
+    @JoinColumn()
+    private Role role;
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 	public Integer getId() {
 		return id;
@@ -122,14 +136,6 @@ public class BestUser implements Serializable{
 
 	public void setLoginDate(Date loginDate) {
 		this.loginDate = loginDate;
-	}
-
-	public Integer getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
 	}
 
 	public Integer getGroupId() {

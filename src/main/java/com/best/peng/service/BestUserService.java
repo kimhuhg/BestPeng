@@ -3,7 +3,7 @@ package com.best.peng.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.best.peng.domian.BestUser;
+import com.best.peng.sys.entity.BestUser;
 
 public interface BestUserService {
 	
