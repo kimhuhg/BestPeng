@@ -81,12 +81,16 @@ public class BestUserServiceImpl implements BestUserService {
 	}
 
 	/**
-	 * 根据Email和密码获取用户
+	 * 根据Email和密码获取用户---密码账户检测
 	 */
 	@Override
-	public BestUser findByBestUserByEmailAndPwd(String email, String password) {
+	public boolean findByBestUserByEmailAndPwd(String email, String password) {
 		password=UserUtils.passwordEncrypt(password);
-		return bestUserRepository.findByEmailAndPassword(email, password);
+		BestUser user=bestUserRepository.findByEmailAndPassword(email, password);
+		if(user!=null){
+			return true;
+		}
+		return false;
 	}
 
 	/**

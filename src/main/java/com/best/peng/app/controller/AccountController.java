@@ -6,6 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.best.peng.base.controller.BaseController;
 import com.best.peng.service.BestUserService;
 import com.best.peng.sys.entity.BestUser;
+import com.best.peng.util.ShiroUtils;
 
 @Controller
 @RequestMapping("account")
@@ -38,24 +45,42 @@ public class AccountController extends BaseController{
 	public String login(BestUser user,@RequestParam(value="backUrl",required=false) String backUrl,
 			HttpServletRequest request){
 		//用户账号密码验证
-		BestUser userDb=bestUserService.findByBestUserByEmailAndPwd(user.getEmail(),user.getPassword());
-		
-		if(userDb==null){
-			return msg(1,"用户名或密码错误");
-		}
-		
-		//检测邮箱是否激活?
-		
-		HttpSession session=request.getSession();
-		session.setAttribute("user", userDb);
-		
-		//更新登录时间
-		bestUserService.updateBestUserLoginDate(userDb.getEmail());
+//		BestUser userDb=bestUserService.findByBestUserByEmailAndPwd(user.getEmail(),user.getPassword());
+//		
+//		if(userDb==null){
+//			return msg(1,"用户名或密码错误");
+//		}
+//		
+//		//检测邮箱是否激活?
+//		
+//		HttpSession session=request.getSession();
+//		session.setAttribute("user", userDb);
+//		
+//		//更新登录时间
+//		bestUserService.updateBestUserLoginDate(userDb.getEmail());
 		
 		//获取登录之前访问URL，如果存在则跳回
 //		if(!ValidateHelper.isEmptyString(backUrl)){
 //			return "redirect:"+backUrl;
 //		}
+		
+		try{
+			Subject subject = ShiroUtils.getSubject();
+			
+			String password = user.getPassword();
+			UsernamePasswordToken token = new UsernamePasswordToken(user.getEmail(), password);
+			subject.login(token);
+		}catch (UnknownAccountException e) {
+			return msg(1,e.getMessage());
+		}catch (IncorrectCredentialsException e) {
+			return msg(2,e.getMessage());
+		}catch (LockedAccountException e) {
+			return msg(3,e.getMessage());
+		}catch (AuthenticationException e) {
+			return msg(4,"账户验证失败");
+		}
+		
+		// 此方法不处理登录成功,由shiro进行处理.
 		return success();
 	}
 	
@@ -89,53 +114,12 @@ public class AccountController extends BaseController{
 	/**
 	 * logout
 	 */
-	@RequestMapping(value="logout",method=RequestMethod.GET)
-	public String logout(HttpSession session){
-		if(session.getAttribute("user")!=null){
-			session.setAttribute("user", null);
-		}
-		return "redirect:/login";
-	}
-	
-	/**
-	 * 个人设置
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value="set",method=RequestMethod.GET)
-	public String set(HttpSession session,ModelMap model){
-		BestUser user=(BestUser)session.getAttribute("user");
-		model.addAttribute("user", user);
-		return "account/set";
-	}
-	
-	
-	/**
-	 * 修改密码
-	 * @param oldpassword
-	 * @param newPassword
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value="repassword",method=RequestMethod.POST)
-	public Map<String,Object> updatePwd(@RequestParam("password") String oldPassword,
-			@RequestParam("newPassword") String newPassword,HttpSession session,
-			Model model){
-		Map<String,Object> message=new HashMap<String,Object>();
-		
-		BestUser user=(BestUser)session.getAttribute("user");
-		if(user!=null){
-			int count=bestUserService.updateBestUserPassword(user.getId(), oldPassword, newPassword);
-			if(count>0){
-				message.put("code", 200);
-				message.put("msg", "密码修改成功!");
-			}else{
-				message.put("code", 500);
-				message.put("msg", "旧密码不正确!");
-			}
-		}
-		
-		return message;
-	}
+//	@RequestMapping(value="logout",method=RequestMethod.GET)
+//	public String logout(HttpSession session){
+//		if(session.getAttribute("user")!=null){
+//			session.setAttribute("user", null);
+//		}
+//		return "redirect:/login";
+//	}
 	
 }

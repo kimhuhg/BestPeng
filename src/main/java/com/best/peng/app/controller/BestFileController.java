@@ -20,14 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.best.peng.service.BestFileService;
 
 @Controller
 @RequestMapping("file")
 public class BestFileController {
-	
-	@Resource
-	private BestFileService bestFileService;
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String get(){

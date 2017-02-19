@@ -37,12 +37,12 @@ public class BestHandlerInterceptor implements HandlerInterceptor{
 		//获取拦截的地址，便于登陆后跳转
 		String backUrl=arg0.getRequestURI();
 		System.out.println(arg0.getRequestURL());
-		HttpSession session=arg0.getSession();
-		BestUser user=(BestUser)session.getAttribute("user");
-		if(user==null){
-			arg1.sendRedirect("/login?backUrl="+backUrl);
-			return false;
-		}
+//		HttpSession session=arg0.getSession();
+//		BestUser user=(BestUser)session.getAttribute("user");
+//		if(user==null){
+//			arg1.sendRedirect("/login?backUrl="+backUrl);
+//			return false;
+//		}
 		return true;// 只有返回true才会继续向下执行，返回false取消当前请求
 	}
 
