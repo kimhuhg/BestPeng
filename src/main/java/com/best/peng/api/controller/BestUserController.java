@@ -33,7 +33,7 @@ public class BestUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public BestUser addOrUpdate(@RequestBody BestUser user){
+	public BestUser addOrUpdate(BestUser user){
 		return bestUserService.saveOrUpdate(user);
 	}
 	

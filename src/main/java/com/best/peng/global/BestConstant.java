@@ -17,4 +17,7 @@ public class BestConstant {
 	//默认用户头像
 	public static final String AVATAR_URL="localhost:8082/image/glc_coupe.jpg";
 	
+	//拥有最高权限账号
+	public static final String ADMIN_EMAIL="p@peng.com";
+	
 }

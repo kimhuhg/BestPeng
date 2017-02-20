@@ -3,6 +3,7 @@ package com.best.peng.global;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,17 @@ public class GlobalExcetionHandler {
 	// 异常处理的方法
 	@ExceptionHandler
 	public ModelAndView error(Exception ex,HttpServletRequest req) {
+		
+		//如果异常为无权限异常时
+		if(ex instanceof UnauthorizedException){
+			ModelAndView mv = new ModelAndView("403");
+			
+			mv.addObject("excetion", ex);
+			mv.addObject("message", ex.getMessage());
+			mv.addObject("url", req.getRequestURL());
+			return mv;
+		}
+		
 		ModelAndView mv = new ModelAndView("500");
 		
 		mv.addObject("excetion", ex);
