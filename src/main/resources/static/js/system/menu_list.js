@@ -122,7 +122,7 @@ function loadDateTable() {
 		"processing": true,//打开加载提示
 		//"stateSave": true,//保存最后一次分页信息、排序信息，当页面刷新，或者重新进入这个页面，恢复上次的状态。
 		"ajax" : {
-			"url" : "/api/menu",
+			"url" : "/api/module",
 			"type" : "GET",//请求方式
 			"data" : { //提交到服务器的参数
 				//"title":"123"

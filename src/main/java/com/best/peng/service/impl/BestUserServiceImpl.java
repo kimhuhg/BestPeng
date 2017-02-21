@@ -61,6 +61,8 @@ public class BestUserServiceImpl implements BestUserService {
 	 */
 	@Override
 	public BestUser getUserById(Integer userId) {
+		
+		
 		return bestUserRepository.findOne(userId);
 	}
 

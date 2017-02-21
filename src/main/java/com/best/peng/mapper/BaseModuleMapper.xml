@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.best.peng.mapper.BaseModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.best.peng.sys.entity.BaseModule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="modified_date" property="modifiedDate" jdbcType="TIMESTAMP" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="sort_no" property="sortNo" jdbcType="INTEGER" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+    <result column="visible" property="visible" jdbcType="BIT" />
+    <result column="permission_code" property="permissionCode" jdbcType="VARCHAR" />
+    <result column="permission_type" property="permissionType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, icon, url, name, modified_date, parent_id, sort_no, valid, visible, 
+    permission_code, permission_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_module
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from base_module
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.best.peng.sys.entity.BaseModule" >
+    insert into base_module (id, create_date, icon, 
+      url, name, modified_date, 
+      parent_id, sort_no, valid, 
+      visible, permission_code, permission_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{icon,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{modifiedDate,jdbcType=TIMESTAMP}, 
+      #{parentId,jdbcType=INTEGER}, #{sortNo,jdbcType=INTEGER}, #{valid,jdbcType=BIT}, 
+      #{visible,jdbcType=BIT}, #{permissionCode,jdbcType=VARCHAR}, #{permissionType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.best.peng.sys.entity.BaseModule" >
+    insert into base_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="modifiedDate != null" >
+        modified_date,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="sortNo != null" >
+        sort_no,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="visible != null" >
+        visible,
+      </if>
+      <if test="permissionCode != null" >
+        permission_code,
+      </if>
+      <if test="permissionType != null" >
+        permission_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedDate != null" >
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sortNo != null" >
+        #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=BIT},
+      </if>
+      <if test="permissionCode != null" >
+        #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionType != null" >
+        #{permissionType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.best.peng.sys.entity.BaseModule" >
+    update base_module
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedDate != null" >
+        modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sortNo != null" >
+        sort_no = #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="visible != null" >
+        visible = #{visible,jdbcType=BIT},
+      </if>
+      <if test="permissionCode != null" >
+        permission_code = #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionType != null" >
+        permission_type = #{permissionType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.best.peng.sys.entity.BaseModule" >
+    update base_module
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      icon = #{icon,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      sort_no = #{sortNo,jdbcType=INTEGER},
+      valid = #{valid,jdbcType=BIT},
+      visible = #{visible,jdbcType=BIT},
+      permission_code = #{permissionCode,jdbcType=VARCHAR},
+      permission_type = #{permissionType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 获取单个对象 -->
+  <select id="getObject" resultType="com.best.peng.sys.entity.BaseModule">
+		select * from base_module where id = #{value}
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="save" parameterType="com.best.peng.sys.entity.BaseModule">
+		insert into base_module(create_date,icon,url,name,parent_id,sort_no,permission_code,permission_type) 
+		values(#{create_date},#{icon},#{url},#{name},#{parent_id},#{sort_no},#{permission_code},#{permission_type})
+	</insert>
+	
+	<!-- 列表分页查询 -->
+	<select id="list" resultType="com.best.peng.sys.entity.BaseModule" resultMap="BaseResultMap">
+		select m.*,(select p.name from base_module p where p.id = m.parent_id) as parentName 
+			from base_module m order by m.sort_no asc 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+	<!-- 总记录数 -->
+	<select id="total" resultType="int">
+		select count(*) from base_module
+	</select>
+	 
+	 <!-- 更新 -->
+	<update id="update" parameterType="com.best.peng.sys.entity.BaseModule">
+		update base_module 
+		<set> 
+			<if test="parentId != null">parent_id = #{parentId}, </if>
+			<if test="name != null">name = #{name}, </if>
+			<if test="url != null">url = #{url}, </if>
+			<if test="perms != null">permission_code = #{permissionCode}, </if>
+			<if test="type != null">permission_type = #{permissionType}, </if>
+			<if test="icon != null">icon = #{icon}, </if>
+			<if test="orderNum != null">sort_no = #{sortNo},</if>
+			<if test="orderNum != null">modified_date = #{modifiedDate}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		delete from base_module where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		;
+		delete from base_role_module where id in 
+		<foreach item="menuId" collection="array" open="(" separator="," close=")">
+			#{menuId}
+		</foreach>
+	</delete>
+  
+  
+</mapper>
