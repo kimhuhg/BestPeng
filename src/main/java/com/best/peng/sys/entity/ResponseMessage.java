@@ -15,6 +15,15 @@ public class ResponseMessage {
 	private String msg;
 	//错误代码
 	private String error;
+	//数据集
+	private Object data;
+	
+	public Object getData() {
+		return data;
+	}
+	public void setData(Object data) {
+		this.data = data;
+	}
 	public Integer getCode() {
 		return code;
 	}

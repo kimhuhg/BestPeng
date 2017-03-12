@@ -57,10 +57,11 @@ public class BaseController {
 	 * 响应消息对象
 	 * @return
 	 */
-	public ResponseMessage getReMsg(Integer code,String msg){
+	public ResponseMessage getReMsg(Integer code,String msg,Object data){
 		ResponseMessage rm=new ResponseMessage();
 		rm.setCode(code);
 		rm.setMsg(msg);
+		rm.setData(data);
 		return rm;
 	}
 
@@ -71,7 +72,10 @@ public class BaseController {
 	 * @return
 	 */
 	public String msg(Integer code,String msg){
-		return json(getReMsg(code,msg));
+		return json(getReMsg(code,msg,null));
+	}
+	public String msg(Integer code,String msg,Object data){
+		return json(getReMsg(code,msg,data));
 	}
 	
 	public String success(){

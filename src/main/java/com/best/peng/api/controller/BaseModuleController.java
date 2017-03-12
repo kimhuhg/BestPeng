@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.best.peng.base.controller.BaseController;
@@ -20,6 +21,7 @@ public class BaseModuleController extends BaseController{
 	
 	@Autowired
 	private BaseModuleService baseModuleService;
+	
 	@RequestMapping(value="{id}",method=RequestMethod.GET)
 	public String getBaseModule(@PathVariable("id") Integer id){
 		return json(baseModuleService.selectByPrimaryKey(id));
@@ -33,7 +35,7 @@ public class BaseModuleController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET)
-	public String list(Integer draw,Integer start,Integer length){
+	public String list(Integer draw,@RequestParam(defaultValue="1",required=false)Integer start,@RequestParam(defaultValue="1",required=false)Integer length){
 		//分页插件
 		PageHelper.startPage(start,length);//(当前页码，每页条数)
 		List<BaseModule> data=baseModuleService.list();

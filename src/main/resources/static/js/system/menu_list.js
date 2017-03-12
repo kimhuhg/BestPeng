@@ -141,10 +141,10 @@ function loadDateTable() {
 						"className":"hidden-480"
 					}, {
 						"title" : "名称",
-						"data" : "menuName"
+						"data" : "name"
 					}, {
 						"title" : "URL",
-						"data" : "menuLink"
+						"data" : "url"
 					}, {
 						"title" : "上级菜单",
 						"data" : "parentName",
@@ -166,7 +166,7 @@ function loadDateTable() {
 						"data":"permissionCode"
 					},{
 						"title" : "ICON",
-						"data" : "iconName",
+						"data" : "icon",
 						"className":"hidden-480"
 					}, {
 						"title" : "排序编号",
@@ -190,7 +190,7 @@ function loadDateTable() {
 						"className":"hidden-480",
 						"orderable":false,//禁止该列排序
 						"render" : function(data, type, row) {
-							return '<button onclick="editMenu('+data+',\''+row.menuName+'\',\''+row.menuLink+'\','+row.parentId+',\''+row.parentName+'\',\''+row.iconName+'\','+row.sortNo
+							return '<button onclick="editMenu('+data+',\''+row.name+'\',\''+row.url+'\','+row.parentId+',\''+row.parentName+'\',\''+row.icon+'\','+row.sortNo
 							+','+row.valid+','+row.visible+','+row.permissionType+',\''+row.permissionCode+'\');" data-toggle="modal" data-target="#modal-add_menu" class="btn btn-minier btn-info" title="修改菜单"><i class="ace-icon fa fa-pencil bigger-120"></i></button>&nbsp;'+
 							'<button onclick="delMenu('+data+');" class="btn btn-minier btn-danger" title="删除菜单"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>';
 						}
@@ -229,11 +229,11 @@ function format ( d ) {
         '</tr>'+
         '<tr>'+
             '<td>菜单名称:</td>'+
-            '<td>'+d.menuName+'</td>'+
+            '<td>'+d.name+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>菜单URL:</td>'+
-            '<td>'+d.menuLink+'</td>'+
+            '<td>'+d.url+'</td>'+
         '</tr>'+
     '</table>';
 }
@@ -256,8 +256,8 @@ function checkedBox(id,obj){
 	
 }
 //加载菜单到表单
-function editMenu(id,menuName,menuLink,parentId,parentName,iconName,sortNo,valid,visible,permissionType,permissionCode){
-	var menu={id:id,menuName:menuName,menuLink:menuLink,parentId:parentId,parentName:parentName,iconName:iconName,sortNo:sortNo,valid:valid,visible:visible,permissionType:permissionType,permissionCode:permissionCode};
+function editMenu(id,name,url,parentId,parentName,icon,sortNo,valid,visible,permissionType,permissionCode){
+	var menu={id:id,name:name,url:url,parentId:parentId,parentName:parentName,icon:icon,sortNo:sortNo,valid:valid,visible:visible,permissionType:permissionType,permissionCode:permissionCode};
 	loadData(menu);
 }
 
